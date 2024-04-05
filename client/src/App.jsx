@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-// import "./App.css";
+import "./App.css";
 import { Context } from "./main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Auth/Login";
@@ -19,23 +19,24 @@ import MyJobs from "./components/Job/MyJobs";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/user/getuser",
-          {
-            withCredentials: true,
-          }
-        );
-        setUser(response.data.user);
-        setIsAuthorized(true);
-      } catch (error) {
-        setIsAuthorized(false);
-      }
-    };
-    fetchUser();
-  }, [isAuthorized]);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:4000/user/getuser",
+  //         {
+  //           withCredentials: true,
+  //         }
+  //       );
+  //       setUser(response.data.user);
+  //       setIsAuthorized(true);
+  //     } catch (error) {
+  //       setIsAuthorized(false);
+  //     }
+  //   };
+  //   fetchUser();
+  // }, [isAuthorized]);
+
   return (
     <>
       <BrowserRouter>

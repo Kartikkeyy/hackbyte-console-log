@@ -6,7 +6,6 @@ import { FaRegUser } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
-import "./Auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,30 +15,30 @@ const Login = () => {
   const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3000/user/login",
-        { email, password, role },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-      toast.success(data.message);
-      setEmail("");
-      setPassword("");
-      setRole("");
-      setIsAuthorized(true);
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
+    // e.preventDefault();
+    // try {
+    //   const { data } = await axios.post(
+    //     "http://localhost:3000/user/login",
+    //     { email, password, role },
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   toast.success(data.message);
+    //   setEmail("");
+    //   setPassword("");
+    //   setRole("");
+    //   setIsAuthorized(true);
+    // } catch (error) {
+    //   toast.error(error.response.data.message);
+    // }
   };
 
-  if (isAuthorized) {
-    return <Navigate to={'/'} />
+  if(isAuthorized){
+    return <Navigate to={'/'}/>
   }
 
   return (
@@ -47,46 +46,47 @@ const Login = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            {/* <img src="/login_hb.png" alt="logo" /> */}
+            {/* <img src="/JobZeelogo.png" alt="logo" /> */}
             <h3>Login to your account</h3>
           </div>
           <form>
             <div className="inputTag">
               <label>Login As</label>
+              
               <div>
-                <FaRegUser />
+              <FaRegUser />
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
                   <option value="Employer">Employer</option>
                   <option value="Job Seeker">Job Seeker</option>
                 </select>
-
+                
               </div>
             </div>
             <div className="inputTag">
               <label>Email Address</label>
               <div>
-                <MdOutlineMailOutline />
+              <MdOutlineMailOutline />
                 <input
                   type="email"
                   placeholder="example@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-
+                
               </div>
             </div>
             <div className="inputTag">
               <label>Password</label>
               <div>
-                <RiLock2Fill />
+              <RiLock2Fill/>
                 <input
                   type="password"
                   placeholder="Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-
+                
               </div>
             </div>
             <button type="submit" onClick={handleLogin}>
@@ -96,9 +96,7 @@ const Login = () => {
           </form>
         </div>
         <div className="banner">
-          <div>
-            <img src="/login_hb.png" alt="login" />
-          </div>
+          <img src="/login_hb.png" alt="login" />
         </div>
       </section>
     </>
