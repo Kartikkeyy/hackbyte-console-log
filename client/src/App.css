@@ -602,6 +602,9 @@ p {
   min-height: 100vh;
   padding: 50px 20px;
 }
+.jobs h1 {
+  font-weight: 500;
+}
 .jobs .container {
   display: flex;
   flex-direction: column;
@@ -622,13 +625,14 @@ p {
 .jobs .container .banner .card {
   background: #fff;
   text-decoration: none;
-  width: 320px;
-  height: 220px;
+  width: 400px;
+  height: 450px;
   padding: 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 30px;
   justify-content: center;
+  text-align: center;
 }
 .jobs .container .banner .card:hover {
   transition: all 0.3s;
@@ -637,26 +641,27 @@ p {
   -moz-box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
 }
 .jobs .container .banner .card p:first-child {
-  font-weight: bold;
-  font-size: 1.6rem;
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 .jobs .container .banner .card p:nth-child(2) {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: gray;
 }
 .jobs .container .banner .card p:last-child {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: gray;
 }
 .jobs .container .banner .card a {
   text-decoration: none;
-  padding: 7px;
+  padding: 15px 7px;
   font-size: 20px;
   color: #3e98fe;
   background: rgb(233, 249, 255);
-  width: 100%;
-  display: block;
+  width: 50%;
   text-align: center;
+  border-radius: 20px;
+  margin-left: 90px;
 }
 @media (max-width: 1520px) {
   .jobs .container {
