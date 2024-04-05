@@ -21,7 +21,28 @@ const Register = () => {
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
 
   const handleRegister = async (e) => {
-    
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/user/register",
+        { name, phone, email, role, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      toast.success(data.message);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setPhone("");
+      setRole("");
+      setIsAuthorized(true);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   if(isAuthorized){

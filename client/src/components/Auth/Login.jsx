@@ -16,7 +16,26 @@ const Login = () => {
   const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleLogin = async (e) => {
-
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/user/login",
+        { email, password, role },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      toast.success(data.message);
+      setEmail("");
+      setPassword("");
+      setRole("");
+      setIsAuthorized(true);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   if (isAuthorized) {
