@@ -169,9 +169,8 @@ p {
   overflow-y: hidden;
 }
 .authPage .banner img {
-  width: 100%;
-  width: 550px;
-  height: 550px;
+    width : 350px;
+    height : 300px
 }
 @media (max-width: 1520px) {
   .authPage {
