@@ -31,10 +31,14 @@ const userSchema = mongoose.Schema({
         required:[true,"Please provide your role"],
         enum: ["Student","Company","Tnp"]
     },
-    institute:{
-        type:String,
-        required:[true,"Please provide your institute Enter N/A in case of role is Company"]
-    },
+    institute: {
+        type: String,
+        required: [function() {
+            return this.role === "Student" || this.role === "Tnp";
+        },"For your selected role Institute field is required"],
+        minLength:[2,"Institute name must be greater than 2 characters"],
+        maxLength:[50,"Institute name must be smaller than 50 characters"],
+    },
     createdAt:{
         type:Date,
         default:Date.now
