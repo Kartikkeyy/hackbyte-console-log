@@ -691,24 +691,39 @@ p {
   flex-direction: column;
   align-items: center;
 }
-.jobDetail .container .banner {
+
+.jobDetail .container h3{
+  font-weight: 500;
+}
+
+.jobDetail .container .jobDetailForm{
+  display: flex;
+  justify-content: center;
+  width: 70%;
+}
+.jobDetail .container .jobDetailForm .banner {
   width: 100%;
   min-height: 767px;
   padding: 50px 0;
   display: flex;
   flex-direction: column;
   gap: 25px;
-  justify-content: center;
+  /* justify-content: center; */
 }
-.jobDetail .container .banner p {
-  font-weight: bold;
+.jobDetail .container .jobDetailForm .banner p {
+  font-weight: 600;
+  font-size: 1.5rem;
   color: #3e98fe;
+  border-bottom: 1px solid gray;
+  padding-bottom: 10px;
+  width: 100%;
+  margin-bottom: 8px;
 }
-.jobDetail .container .banner p span {
+.jobDetail .container .jobDetailForm .banner p span {
   color: #18191c;
   font-weight: 400;
 }
-.jobDetail .container .banner a {
+.jobDetail .container .jobDetailForm .banner a {
   background-color: #3e98fe;
   color: rgb(233, 249, 255);
   font-size: 20px;
