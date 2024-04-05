@@ -16,11 +16,11 @@ const Login = () => {
   const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleLogin = async (e) => {
-   
+
   };
 
-  if(isAuthorized){
-    return <Navigate to={'/'}/>
+  if (isAuthorized) {
+    return <Navigate to={'/'} />
   }
 
   return (
@@ -35,36 +35,39 @@ const Login = () => {
             <div className="inputTag">
               <label>Login As</label>
               <div>
+                <FaRegUser />
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
                   <option value="Employer">Employer</option>
                   <option value="Job Seeker">Job Seeker</option>
                 </select>
-                <FaRegUser />
+
               </div>
             </div>
             <div className="inputTag">
               <label>Email Address</label>
               <div>
+                <MdOutlineMailOutline />
                 <input
                   type="email"
                   placeholder="example@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <MdOutlineMailOutline />
+
               </div>
             </div>
             <div className="inputTag">
               <label>Password</label>
               <div>
+                <RiLock2Fill />
                 <input
                   type="password"
                   placeholder="Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <RiLock2Fill />
+
               </div>
             </div>
             <button type="submit" onClick={handleLogin}>
@@ -74,7 +77,9 @@ const Login = () => {
           </form>
         </div>
         <div className="banner">
-          <img src="/login_hb.png" alt="login"/>
+          <div>
+            <img src="/login_hb.png" alt="login" />
+          </div>
         </div>
       </section>
     </>

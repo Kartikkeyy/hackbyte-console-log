@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 ::-webkit-scrollbar {
   display: none;
@@ -93,7 +93,9 @@ p {
   flex-direction: column;
 }
 .authPage .container .header h3 {
-  font-size: 1.6rem;
+  font-size: 2.6rem;
+  font-weight: 100;
+  margin-bottom: 40px;
 }
 .authPage .container .header img {
   width: 300px;
@@ -109,19 +111,25 @@ p {
   flex-direction: column;
   gap: 20px;
 }
+
 .authPage .container form .inputTag {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
+
 .authPage .container form .inputTag div {
   display: flex;
   align-items: center;
   border-radius: 7px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 8px;
 }
 .authPage .container form .inputTag div input,
 .authPage .container form .inputTag div select {
-  background: #87878778;
+  
   padding: 8px;
   border: none;
   width: 100%;
@@ -131,35 +139,52 @@ p {
 .authPage .container form .inputTag div select:focus {
   outline: none;
 }
+
+.authPage .container form .inputTag div input,
+.authPage .container form .inputTag div select option{
+  font-size: 16px;
+}
 .authPage .container form .inputTag div svg {
   width: 10%;
   font-size: 1.5rem;
-  background: #2d5649;
   height: 100%;
   padding: 8px;
-  color: #fff;
+  color: #000;
 }
 .authPage .container form button {
   padding: 12px;
   text-align: center;
-  border: none;
   margin-top: 25px;
   font-weight: 700;
+  font-size: 1.5rem ;
+  background: transparent;
+  color: #000;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 8px;
+}
+
+.authPage .container form button:hover{
+  background: #3e98fe;
+  border: 1px solid #fff;
   color: #fff;
-  background: #2d5649;
-  font-size: 1.2rem;
-  border-radius: 7px;
 }
 .authPage .container form a {
   padding: 12px;
   text-align: center;
-  border: 1px solid #2d5649;
+  border: 1px solid black;
   margin-top: 25px;
   font-weight: 700;
-  color: #2d5649;
-  font-size: 1.2rem;
+  color: #000;
+  font-size: 1.5rem;
   text-decoration: none;
-  border-radius: 7px;
+  border-radius: 20px;
+}
+
+.authPage .container form a:hover{
+  background: #3e98fe;
+  border: 1px solid #fff;
+  color: #fff;
 }
 .authPage .banner {
   flex: 2;
