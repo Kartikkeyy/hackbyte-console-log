@@ -13,10 +13,6 @@ const applicationSchema = mongoose.Schema({
         validator:[validator.isEmail,"Please give a valid Email"],
         required:[true,"Please provide a Email"]
     },
-    coverLetter:{
-        type:String,
-        required:[true,"Please provide Cover Letter"]
-    },
     phone:{
         type:Number,
         required:[true,"Please provide your Phone number"]
@@ -24,6 +20,15 @@ const applicationSchema = mongoose.Schema({
     address:{
         type:String,
         required:[true,"Please provide your Address"]
+    },
+    jobId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Job"
+    },
+    status:{
+        type:String,
+        enum:["Pending","Selected","Not Selected"],
+        default:"Pending"
     },
     resume:{
         public_id:{
@@ -34,10 +39,6 @@ const applicationSchema = mongoose.Schema({
             type:String,
             required:true,
         }
-    },
-    for:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Job"
     },
     applicantID:{
         user:{

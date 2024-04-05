@@ -45,6 +45,22 @@ export const postJob = catchAsyncErrors(async(req,res,next)=>{
     })
 })
 
+export const getOnejob = catchAsyncErrors(async(req,res,next)=>{
+    if(req.user.role === "Company"){
+        return next(new ErrorHandler("You are not authorized for this route"))
+    }
+    const {id} = req.params
+    if(!id){
+        return next(new ErrorHandler("id not provided",400))
+    }
+    const job = await Job.find({_id:id})
+
+    res.status(200).json({
+        success:true,
+        job
+    })
+})
+
 export const updateJob = catchAsyncErrors(async(req,res,next)=>{
     const {role} = req.user;
     if(!(role === "Company")){
