@@ -108,6 +108,8 @@ export const myApplications = catchAsyncErrors(async(req,res,next)=>{
         success:true,
         applications
     })
+
+    // if(role === "str")
 })
 
 export const companyGetAllApplication = catchAsyncErrors(async(req,res,next)=>{
@@ -116,9 +118,8 @@ export const companyGetAllApplication = catchAsyncErrors(async(req,res,next)=>{
         return next(new ErrorHandler("Invalid route for your Role",400))
     }
 
-    const {jobId} = req.params
     const {_id} = req.user;
-    const applications = await Application.find({"employerID.user":_id,"jobId":jobId})
+    const applications = await Application.find({"employerID.user":_id})
     res.status(200).json({
         success:true,
         applications
@@ -146,3 +147,4 @@ export const tnpGetAllApplication = catchAsyncErrors(async(req,res,next)=>{
         applications
     })
 })
+
