@@ -58,7 +58,7 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
     }
     
     const application = await Application.create({
-        name,email,phone,address,resume:{
+        name,email,phone,address,jobId,resume:{
             public_id: cloudinaryResponse.public_id,
             url: cloudinaryResponse.secure_url
         },applicantID,employerID
@@ -103,8 +103,44 @@ export const myApplications = catchAsyncErrors(async(req,res,next)=>{
     if(!(role === "Student")){
         return next(new ErrorHandler("You are not authorized for this route"),400)
     }
-
     const applications = await Application.find({"applicantID.user":_id})
+    res.status(200).json({
+        success:true,
+        applications
+    })
+})
+
+export const companyGetAllApplication = catchAsyncErrors(async(req,res,next)=>{
+    const {role} = req.user;
+    if(!(role === "Company")){
+        return next(new ErrorHandler("Invalid route for your Role",400))
+    }
+
+    const {jobId} = req.params
+    const {_id} = req.user;
+    const applications = await Application.find({"employerID.user":_id,"jobId":jobId})
+    res.status(200).json({
+        success:true,
+        applications
+    })
+})
+
+export const tnpGetAllApplication = catchAsyncErrors(async(req,res,next)=>{
+    const {role} = req.user;
+    if(!(role === "Tnp")){
+        return next(new ErrorHandler("Invalid route for your Role",400))
+    }
+
+    const {institute} = req.user
+    // const applications = await Application.find({"institute":institute})
+    // res.status(200).json({
+    //     success:true,
+    //     applications
+    // })
+
+    const jobs = await Job.find({ institute: institute }).select('_id');
+    const jobIds = jobs.map(job => job._id);
+    const applications = await Application.find({ jobId: { $in: jobIds } });
     res.status(200).json({
         success:true,
         applications
