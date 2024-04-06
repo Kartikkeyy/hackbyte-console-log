@@ -46,7 +46,7 @@ const Login = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            {/* <img src="/JobZeelogo.png" alt="logo" /> */}
+            <img src="/logo_word_hp.png" alt="logo" />
             <h3>Login to your account</h3>
           </div>
           <form>
