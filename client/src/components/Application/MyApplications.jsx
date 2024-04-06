@@ -16,16 +16,18 @@ const MyApplications = () => {
 
   useEffect(() => {
     try {
-    //   if (user && user.role === "Company") {
-    //     axios
-    //       .get("http://localhost:4000/application/my", {
-    //         withCredentials: true,
-    //       })
-    //       .then((res) => {
-    //         setApplications(res.data.applications);
-    //       });
-    //   }
-    console.log(user.role);
+      if (user && user.role === "Company") {
+        console.log("hello");
+        axios
+          .get("http://localhost:4000/application/company/jobapp", {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data.applications);
+            setApplications(res.data.applications);
+          });
+      }
+    // console.log(user.role);
       if(user && user.role === "Student") {
         console.log("hello");
         axios
@@ -33,7 +35,7 @@ const MyApplications = () => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log(res.data.applications);
+            // console.log(res.data.applications);
             setApplications(res.data.applications);
           })
           .catch((error)=>{
@@ -146,11 +148,9 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
           </p>
         </div>
         <div className="resume">
-          <img
-            src={element.resume.url}
-            alt="resume"
-            onClick={() => openModal(element.resume.url)}
-          />
+            <a href={element.resume.url} target="_blank">
+                Link to Resume
+            </a>
         </div>
         <div className="btn_area">
           <button onClick={() => deleteApplication(element._id)}>
