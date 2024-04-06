@@ -85,6 +85,7 @@ p {
   justify-content: center;
   background: #fff;
   padding: 20px 20px;
+  
 }
 .authPage .container .header {
   display: flex;
@@ -108,17 +109,21 @@ p {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
 }
 .authPage .container form .inputTag {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 50%;
+
 }
 .authPage .container form .inputTag div {
   display: flex;
   align-items: center;
   border-radius: 7px;
   border: 2px solid black;
+  height: 55%;
 }
 .authPage .container form .inputTag div input,
 .authPage .container form .inputTag div select {
@@ -143,6 +148,7 @@ p {
 }
 .authPage .container form button {
   padding: 12px;
+  width: 50%;
   text-align: center;
   border: none;
   margin-top: 25px;
@@ -169,6 +175,7 @@ p {
   font-size: 1.2rem;
   text-decoration: none;
   border-radius: 20px;
+  width: 50%;
 }
 
 .authPage .container form a:hover{

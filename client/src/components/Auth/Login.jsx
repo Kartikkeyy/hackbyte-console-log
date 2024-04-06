@@ -96,9 +96,7 @@ const Login = () => {
             <Link to={"/register"}>Register Now</Link>
           </form>
         </div>
-        <div className="banner">
-          <img src="/login_hb.png" alt="login" />
-        </div>
+        
       </section>
     </>
   );
