@@ -17,7 +17,7 @@ const JobDetails = () => {
         const res = await axios.get(`http://localhost:4000/job/instjob/${id}`, {
           withCredentials: true,
         });
-        console.log(res.data.job[0]);
+        // console.log(res.data.job[0]);
         setJob(res.data.job[0]);
       } catch (error) {
         navigateTo("/notfound");
@@ -70,7 +70,7 @@ const JobDetails = () => {
                 </span>
               )}
             </p>
-            {user && user.role === "Employer" ? (
+            {user &&( user.role === "Company" || user.role === "Tnp" )? (
               <></>
             ) : (
               <Link to={`/application/post/${job._id}`}>Apply Now</Link>

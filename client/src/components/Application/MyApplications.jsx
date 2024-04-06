@@ -42,7 +42,7 @@ const MyApplications = () => {
     try {
       // console.log(user);
       if (user && user.role === "Company") {
-        console.log("hello");
+        // console.log("hello");
         axios
           .get("http://localhost:4000/application/company/jobapp", {
             withCredentials: true,
@@ -54,7 +54,7 @@ const MyApplications = () => {
       }
     // console.log(user.role);
       if(user && user.role === "Student") {
-        console.log("hello");
+        // console.log("hello");
         axios
           .get("http://localhost:4000/application/my", {
             withCredentials: true,
@@ -66,6 +66,18 @@ const MyApplications = () => {
           .catch((error)=>{
             console.log(error);
           }) ;
+      }
+
+      if (user && user.role === "Tnp") {
+        // console.log("hello");
+        axios
+          .get("http://localhost:4000/application/tnp/allapp", {
+            withCredentials: true,
+          })
+          .then((res) => {
+            // console.log(res.data.applications);
+            setApplications(res.data.applications);
+          });
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -102,6 +114,7 @@ const MyApplications = () => {
   };
 
   return (
+    <>
     <section className="my_applications page">
       {user && user.role === "Student" ? (
         <div className="container">
@@ -125,7 +138,10 @@ const MyApplications = () => {
           )}
         </div>
       ) : (
-        <div className="container">
+        <></>
+      )}
+      {user && user.role ==="Company" ? (
+          <div className="container">
           <h1>Applications From Job Seekers</h1>
           {applications.length <= 0 ? (
             <>
@@ -138,16 +154,44 @@ const MyApplications = () => {
                   element={element}
                   key={element._id}
                   openModal={openModal}
+                  
                 />
               );
             })
           )}
         </div>
-      )}
+        ):(
+          <></>
+        )
+      }
       {modalOpen && (
         <ResumeModel imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
+
+      {user && user.role === "Tnp" ? (
+        <div className="container">
+          <h1>{user.institute} Applications</h1>
+          {applications.length <= 0 ? (
+            <>
+              {" "}
+              <h4>No Applications Found</h4>{" "}
+            </>
+          ) : (
+            applications.map((element) => {
+              return (
+                <TnpCard
+                  element={element}
+                  key={element._id}
+                />
+              );
+            })
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
     </section>
+    </>
   );
 };
 
@@ -173,7 +217,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </div>
         <div className="resume">
             <a href={element.resume.url} target="_blank">
-                Link to Resume
+                Resume
             </a>
         </div>
         <div className="btn_area">
@@ -181,17 +225,17 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
             Delete Application
           </button>
         </div>
-        <div className="status-btn" style={element.status==="Pending"?{color : "#fc6a03"} : element.status === "Selected"? {color:"#355e3v"} : {color : "#808080"}}>
-            <button >
-                {element.status}
-            </button>
+        <div >
+        <button className={element.status}>
+          {element.status}
+        </button>
         </div>
       </div>
     </>
   );
 };
 
-const EmployerCard = ({ element, openModal , status , setStatus}) => {
+const EmployerCard = ({ element, openModal }) => {
   return (
     <>
       <div className="job_seeker_card">
@@ -242,6 +286,39 @@ const EmployerCard = ({ element, openModal , status , setStatus}) => {
             <option value="Selected">Selected</option>
             <option value="Not Selected">Not Selected</option>
           </select>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const TnpCard = ({ element, key }) => {
+  return (
+    <>
+      <div className="job_seeker_card">
+        <div className="detail">
+          <p>
+            <span>Name:</span> {element.name}
+          </p>
+          <p>
+            <span>Email:</span> {element.email}
+          </p>
+          <p>
+            <span>Phone:</span> {element.phone}
+          </p>
+          <p>
+            <span>Address:</span> {element.address}
+          </p>
+        </div>
+        <div className="resume">
+            <a href={element.resume.url} target="_blank">
+                Resume
+            </a>
+        </div>
+        <div >
+          <button className={element.status}>
+            {element.status}
+          </button>
         </div>
       </div>
     </>

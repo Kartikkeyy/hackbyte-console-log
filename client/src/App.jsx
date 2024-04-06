@@ -49,7 +49,8 @@ const App = () => {
           <Route path="/job/instjob/:id" element={<JobDetails />} />
           <Route path="/application/post/:id" element={<Application />} />
           <Route path="/application/my" element={user.role === "Student" ? <MyApplications /> : null} />
-        <Route path="/application/company/jobapp" element={user.role !== "Student" ? <MyApplications /> : null} />
+          <Route path="/application/company/jobapp" element={user.role !== "Student" ? <MyApplications /> : null} />
+          <Route path="/application/tnp/allapp" element={user.role === "Tnp" ? <MyApplications /> : null} />
           <Route path="/job/post" element={<PostJob />} />
           <Route path="/job/companyseeall" element={<MyJobs />} />
           <Route path="*" element={<NotFound />} />
