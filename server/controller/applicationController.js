@@ -31,7 +31,6 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
       };
     
     const cloudinaryResponse = await uploadOnCloudinary(resume);
-    console.log(cloudinaryResponse)
     if(!cloudinaryResponse || cloudinaryResponse.error){
         console.log("Cloudinary Error: ",cloudinaryResponse.error || "Unknow Error Occured at cloudinary upload")
         return next(new ErrorHandler("Server side upload failed for your Resume",500))
