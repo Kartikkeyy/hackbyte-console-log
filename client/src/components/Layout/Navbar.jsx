@@ -11,19 +11,19 @@ const Navbar = () => {
     const navigateTo = useNavigate();
 
     const handleLogout = async () => {
-        // try {
-        //   const response = await axios.get(
-        //     "http://localhost:3000/user/logout",
-        //     {
-        //       withCredentials: true,
-        //     }
-        //   );
-        //   toast.success(response.data.message);
-        //   setIsAuthorized(false);
-        //   navigateTo("/login");
-        // } catch (error) {
-        //   toast.error(error.response.data.message), setIsAuthorized(true);
-        // }
+        try {
+          const response = await axios.get(
+            "http://localhost:4000/user/logout",
+            {
+              withCredentials: true,
+            }
+          );
+          toast.success(response.data.message);
+          setIsAuthorized(false);
+          navigateTo("/login");
+        } catch (error) {
+          toast.error(error.response.data.message), setIsAuthorized(true);
+        }
     };
   return (
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
@@ -38,18 +38,18 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/job/getall"} onClick={() => setShow(false)}>
+            <Link to={"/job/instjob"} onClick={() => setShow(false)}>
               ALL JOBS
             </Link>
           </li>
           <li>
             <Link to={"/applications/me"} onClick={() => setShow(false)}>
-              {user && user.role === "Employer"
+              {user && user.role === "Company"
                 ? "APPLICANT'S APPLICATIONS"
                 : "MY APPLICATIONS"}
             </Link>
           </li>
-          {user && user.role === "Employer" ? (
+          {user && user.role === "Company" ? (
             <>
               <li>
                 <Link to={"/job/post"} onClick={() => setShow(false)}>

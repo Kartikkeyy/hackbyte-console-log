@@ -11,22 +11,22 @@ const JobDetails = () => {
 
   const { isAuthorized, user } = useContext(Context);
 
-  //   useEffect(() => {
-  //     axios
-  //       .get(`http://localhost:3000/job/${id}`, {
-  //         withCredentials: true,
-  //       })
-  //       .then((res) => {
-  //         setJob(res.data.job);
-  //       })
-  //       .catch((error) => {
-  //         navigateTo("/notfound");
-  //       });
-  //   }, []);
+    useEffect(() => {
+      axios
+        .get(`http://localhost:4000/job/instjob/${id}`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setJob(res.data.job);
+        })
+        .catch((error) => {
+          navigateTo("/notfound");
+        });
+    }, []);
 
-  //   if (!isAuthorized) {
-  //     navigateTo("/login");
-  //   }
+    if (!isAuthorized) {
+      navigateTo("/login");
+    }
 
   return (
     <section className="jobDetail page">

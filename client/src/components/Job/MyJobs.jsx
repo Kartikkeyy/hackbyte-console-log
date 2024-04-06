@@ -12,25 +12,25 @@ const MyJobs = () => {
   const { isAuthorized, user } = useContext(Context);
 
   const navigateTo = useNavigate();
-  //Fetching all jobs
-//   useEffect(() => {
-//     const fetchJobs = async () => {
-//       try {
-//         const { data } = await axios.get(
-//           "http://localhost:3000/job/getmyjobs",
-//           { withCredentials: true }
-//         );
-//         setMyJobs(data.myjobs);
-//       } catch (error) {
-//         toast.error(error.response.data.message);
-//         setMyJobs([]);
-//       }
-//     };
-//     fetchJobs();
-//   }, []);
-//   if (!isAuthorized || (user && user.role !== "Employer")) {
-//     navigateTo("/");
-//   }
+//   Fetching all jobs
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:4000/job/companyseeall",
+          { withCredentials: true }
+        );
+        setMyJobs(data.myjobs);
+      } catch (error) {
+        toast.error(error.response.data.message);
+        setMyJobs([]);
+      }
+    };
+    fetchJobs();
+  }, []);
+  if (!isAuthorized || (user && user.role !== "Employer")) {
+    navigateTo("/");
+  }
 
   //Function For Enabling Editing Mode
   const handleEnableEdit = (jobId) => {
@@ -45,33 +45,33 @@ const MyJobs = () => {
 
   //Function For Updating The Job
   const handleUpdateJob = async (jobId) => {
-    // const updatedJob = myJobs.find((job) => job._id === jobId);
-    // await axios
-    //   .put(`http://localhost:3000/job/update/${jobId}`, updatedJob, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     toast.success(res.data.message);
-    //     setEditingMode(null);
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error.response.data.message);
-    //   });
+    const updatedJob = myJobs.find((job) => job._id === jobId);
+    await axios
+      .put(`http://localhost:4000/job/update/${jobId}`, updatedJob, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+        setEditingMode(null);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
   };
 
   //Function For Deleting Job
   const handleDeleteJob = async (jobId) => {
-    // await axios
-    //   .delete(`http://localhost:3000/job/delete/${jobId}`, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     toast.success(res.data.message);
-    //     setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error.response.data.message);
-    //   });
+    await axios
+      .delete(`http://localhost:3000/job/delete/${jobId}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+        setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
   };
 
   const handleInputChange = (jobId, field, value) => {

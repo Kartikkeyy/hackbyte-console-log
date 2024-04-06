@@ -21,28 +21,30 @@ const Register = () => {
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
 
   const handleRegister = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   const { data } = await axios.post(
-    //     "http://localhost:3000/user/register",
-    //     { name, phone, email, role, password },
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   toast.success(data.message);
-    //   setName("");
-    //   setEmail("");
-    //   setPassword("");
-    //   setPhone("");
-    //   setRole("");
-    //   setIsAuthorized(true);
-    // } catch (error) {
-    //   toast.error(error.response.data.message);
-    // }
+    e.preventDefault();
+    try {
+        let instituteValue = role === "Company" ? null : institute;
+      const { data } = await axios.post(
+        "http://localhost:4000/user/register",
+        { name, phone, email, role, password , institute: instituteValue},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      toast.success(data.message);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setPhone("");
+      setRole("");
+      setInstitute("");
+      setIsAuthorized(true);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   if(isAuthorized){
@@ -64,8 +66,9 @@ const Register = () => {
               <div>
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
-                  <option value="Employer">Employer</option>
-                  <option value="Job Seeker">Job Seeker</option>
+                  <option value="Company">Company</option>
+                  <option value="Tnp">Tnp</option>
+                  <option value="Student">Student</option>
                 </select>
                 <FaRegUser />
               </div>
@@ -112,7 +115,7 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Your Institute"
-                  value={password}
+                  value={institute}
                   onChange={(e) => setInstitute(e.target.value)}
                 />
                 <FaUniversity />

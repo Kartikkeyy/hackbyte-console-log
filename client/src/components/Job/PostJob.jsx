@@ -19,71 +19,71 @@ const PostJob = () => {
   const { isAuthorized, user } = useContext(Context);
 
   const handleJobPost = async (e) => {
-    // e.preventDefault();
-    // if (salaryType === "Fixed Salary") {
-    //   setSalaryFrom("");
-    //   setSalaryFrom("");
-    // } else if (salaryType === "Ranged Salary") {
-    //   setFixedSalary("");
-    // } else {
-    //   setSalaryFrom("");
-    //   setSalaryTo("");
-    //   setFixedSalary("");
-    // }
-    // await axios
-    //   .post(
-    //     "http://localhost:3000/job/post",
-    //     fixedSalary.length >= 4
-    //       ? {
-    //           title,
-    //           description,
-    //           category,
-    //           country,
-    //           city,
-    //           location,
-    //           institute,
-    //           fixedSalary,
-    //         }
-    //       : {
-    //           title,
-    //           description,
-    //           category,
-    //           country,
-    //           city,
-    //           location,
-    //           institute,
-    //           salaryFrom,
-    //           salaryTo,
-    //         },
-    //     {
-    //       withCredentials: true,
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     toast.success(res.data.message);
-    //     setTitle("");
-    //     setDescription("");
-    //     setCategory("");
-    //     setCountry("");
-    //     setCity("");
-    //     setLocation("");
-    //     setInstitute("");
-    //     setSalaryFrom("");
-    //     setSalaryTo("");
-    //     setFixedSalary("");
-    //     setSalaryType("default");
-    //     // setTitle("");
-    //   })
-    //   .catch((err) => {
-    //     toast.error(err.response.data.message);
-    //   });
+    e.preventDefault();
+    if (salaryType === "Fixed Salary") {
+      setSalaryFrom("");
+      setSalaryFrom("");
+    } else if (salaryType === "Ranged Salary") {
+      setFixedSalary("");
+    } else {
+      setSalaryFrom("");
+      setSalaryTo("");
+      setFixedSalary("");
+    }
+    await axios
+      .post(
+        "http://localhost:4000/job/postjob",
+        fixedSalary.length >= 4
+          ? {
+              title,
+              description,
+              category,
+              country,
+              city,
+              location,
+              institute,
+              fixedSalary,
+            }
+          : {
+              title,
+              description,
+              category,
+              country,
+              city,
+              location,
+              institute,
+              salaryFrom,
+              salaryTo,
+            },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        toast.success(res.data.message);
+        setTitle("");
+        setDescription("");
+        setCategory("");
+        setCountry("");
+        setCity("");
+        setLocation("");
+        setInstitute("");
+        setSalaryFrom("");
+        setSalaryTo("");
+        setFixedSalary("");
+        setSalaryType("default");
+        // setTitle("");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   const navigateTo = useNavigate();
-  if (!isAuthorized || (user && user.role !== "Employer")) {
+  if (!isAuthorized || (user && user.role !== "Company")) {
     navigateTo("/");
   }
 

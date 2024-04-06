@@ -534,11 +534,12 @@ p {
   padding: 20px 0;
 }
 .companies .container .banner .card {
-  width: 340px;
+  width: 440px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   background: #fff;
-  padding: 20px;
+  padding: 30px;
   gap: 15px;
 }
 .companies .container .banner .card:hover {
@@ -790,7 +791,7 @@ p {
   width: 100%;
 }
 .application .container form button:hover {
-  background-color: #184235;
+  background-color: #3e98fe;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -1126,8 +1127,8 @@ p {
 }
 .myJobs .container .banner .card .button_wrapper .check_btn {
   background: transparent;
-  color: #184235;
-  border: 1px solid #184235;
+  color: #3e98fe;
+  border: 1px solid #3e98fe;
   border-radius: 7px;
   width: 50px;
   padding: 8px;
@@ -1138,7 +1139,7 @@ p {
 }
 .myJobs .container .banner .card .button_wrapper .check_btn:hover {
   transition: all 0.3s;
-  background: #184235;
+  background: #3e98fe;
   color: #f1f3f6;
 }
 .myJobs .container .banner .card .button_wrapper .cross_btn {
@@ -1347,12 +1348,12 @@ nav .hamburger {
   font-weight: 500;
   padding: 7px 30px;
   background: transparent;
-  border: 1px solid #184235;
-  color: #184235;
+  border: 1px solid #3e98fe;
+  color: #3e98fe;
   text-decoration: none;
 }
 .notfound .content a:hover {
-  background: #184235;
+  background: #3e98fe;
   transition: all 0.3s;
   color: #f1f3f6;
 }
