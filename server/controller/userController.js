@@ -29,10 +29,6 @@ export const register = catchAsyncErrors(async(req,res,next)=>{
         institute
     })
 
-    res.status(200).json({
-        success:true,
-        user
-    })
     sendToken(user,200,res,"Registration Successfull")
 })
 

@@ -1,6 +1,8 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Application } from "../models/applicationSchema.js";
+import { Job } from "../models/jobSchema.js";
+import cloudinary from "cloudinary"
 
 export const postApplication = catchAsyncErrors(async(req,res,next)=>{
     const {role} = req.user;
@@ -18,14 +20,9 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
           if (!file) {
             return { error: "File path not provided" };
           }
-          if (!file.endsWith('.pdf')) {
-            return { error: "Only PDF files are allowed" };
-          }
-      
-          const response = await cloudinary.uploader.upload(file, {
-            resource_type: "raw",
+          const response = await cloudinary.uploader.upload(file.tempFilePath, {
+            resource_type: "auto",
           });
-      
           return response;
         } catch (err) {
           console.error(err);
@@ -33,7 +30,8 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
         }
       };
     
-    const cloudinaryResponse = uploadOnCloudinary(resume);
+    const cloudinaryResponse = await uploadOnCloudinary(resume);
+    console.log(cloudinaryResponse)
     if(!cloudinaryResponse || cloudinaryResponse.error){
         console.log("Cloudinary Error: ",cloudinaryResponse.error || "Unknow Error Occured at cloudinary upload")
         return next(new ErrorHandler("Server side upload failed for your Resume",500))
@@ -73,3 +71,29 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
     })
     
 })
+
+
+export const applicationUpdate = catchAsyncErrors(async (req, res, next) => {
+    const { role,_id } = req.user;
+    if (!(role === "Company")) {
+        return next(new ErrorHandler("Unauthorized for your role", 400));
+    }
+    const {id} = req.params
+    const { status } = req.body;
+    let application = await Application.findOne({ _id: id });
+    if (!application) {
+        return next(new ErrorHandler("Application not found", 400));
+    }
+    if (!application.employerID.user.equals(_id)) {
+        return next(new ErrorHandler("You are not the Employer for this job"), 400);
+    }
+
+    application.status = status;
+    await application.save();
+
+    res.status(200).json({
+        success: true,
+        application,
+        message: "Job Updated Successfully"
+    });
+});
