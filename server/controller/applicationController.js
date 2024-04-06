@@ -36,7 +36,8 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
         console.log("Cloudinary Error: ",cloudinaryResponse.error || "Unknow Error Occured at cloudinary upload")
         return next(new ErrorHandler("Server side upload failed for your Resume",500))
     }
-    const {name,email,phone,address,jobId} = req.body;
+    const {name,email,phone,address} = req.body;
+    const {jobId} = req.params;
     if(!jobId){
         return next(new ErrorHandler("Job not Found",404))
     }
@@ -97,3 +98,16 @@ export const applicationUpdate = catchAsyncErrors(async (req, res, next) => {
         message: "Job Updated Successfully"
     });
 });
+
+export const myApplications = catchAsyncErrors(async(req,res,next)=>{
+    const { role,_id } = req.user
+    if(!(role === "Student")){
+        return next(new ErrorHandler("You are not authorized for this route"),400)
+    }
+
+    const applications = await Application.find({"applicantID.user":_id})
+    res.status(200).json({
+        success:true,
+        applications
+    })
+})
