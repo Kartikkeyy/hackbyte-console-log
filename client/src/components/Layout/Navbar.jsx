@@ -26,7 +26,7 @@ const Navbar = () => {
         }
     };
   return (
-    <nav className={isAuthorized ? "navbarHide" : "navbarShow"}>
+    <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
         <div className="logo">
           <img src="logo_hp.png" alt="logo" />
