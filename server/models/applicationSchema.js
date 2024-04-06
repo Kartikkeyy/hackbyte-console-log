@@ -27,7 +27,7 @@ const applicationSchema = mongoose.Schema({
     },
     status:{
         type:String,
-        enum:["Pending","Selected","Not Selected"],
+        enum:["Pending","Selected","Not_Selected"],
         default:"Pending"
     },
     resume:{
