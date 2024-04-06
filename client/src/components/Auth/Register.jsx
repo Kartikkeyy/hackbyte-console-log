@@ -57,80 +57,83 @@ const Register = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            {/* <img src="/JobZeelogo.png" alt="logo" /> */}
+            <img src="/logo_word_hp.png" alt="logo" />
             <h3>Create a new account</h3>
           </div>
           <form>
             <div className="inputTag">
               <label>Register As</label>
               <div>
+              <FaRegUser />
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
                   <option value="Company">Company</option>
                   <option value="Tnp">Tnp</option>
                   <option value="Student">Student</option>
                 </select>
-                <FaRegUser />
+                
               </div>
             </div>
             <div className="inputTag">
               <label>Name</label>
               <div>
+              <FaPencilAlt />
                 <input
                   type="text"
                   placeholder="John"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <FaPencilAlt />
+                
               </div>
             </div>
             <div className="inputTag">
               <label>Email Address</label>
               <div>
+              <MdOutlineMailOutline />
                 <input
                   type="email"
                   placeholder="example@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <MdOutlineMailOutline />
+                
               </div>
             </div>
             <div className="inputTag">
               <label>Phone Number</label>
               <div>
+                <FaPhoneFlip />
                 <input
                   type="number"
                   placeholder="12345678"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
-                <FaPhoneFlip />
               </div>
             </div>
             <div className="inputTag">
               <label>Institute</label>
               <div>
+                <FaUniversity />
                 <input
                   type="text"
                   placeholder="Your Institute"
                   value={institute}
                   onChange={(e) => setInstitute(e.target.value)}
                 />
-                <FaUniversity />
               </div>
             </div>
             <div className="inputTag">
               <label>Password</label>
               <div>
+                <RiLock2Fill />
                 <input
                   type="password"
                   placeholder="Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <RiLock2Fill />
               </div>
             </div>
             <button type="submit" onClick={handleRegister}>
@@ -138,9 +141,6 @@ const Register = () => {
             </button>
             <Link to={"/login"}>Login Now</Link>
           </form>
-        </div>
-        <div className="banner">
-          <img src="/register.png" alt="login" />
         </div>
       </section>
     </>
