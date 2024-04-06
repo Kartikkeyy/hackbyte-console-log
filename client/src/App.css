@@ -76,7 +76,7 @@ p {
   min-width: 1500px;
   max-width: 1500px;
   margin: 0 auto;
-  min-height: 80vh;
+  min-height: 100vh;
 }
 .authPage .container {
   flex: 1;
