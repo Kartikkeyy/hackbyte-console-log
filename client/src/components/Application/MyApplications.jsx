@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -10,10 +10,34 @@ const MyApplications = () => {
   const [applications, setApplications] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [resumeImageUrl, setResumeImageUrl] = useState("");
+  const [status,setStatus] = useState("Pending");
 
   const { isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
+  const handleStatusUpdate = (id) => {
+    axios
+      .put(
+        `http://localhost:4000/application/update/${id}`,
+        { status
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        // Handle success response
+        console.log(res.data);
+      })
+      .catch((error) => {
+        // Handle error response
+        console.log(error.response.data.message);
+      });
+  };
+
+  const handleStatusChange = (e,id) => {
+    const newStatus = e.target.value;
+    setStatus(newStatus);
+    handleStatusUpdate(id);
+  };
   useEffect(() => {
     try {
       // console.log(user);
@@ -46,12 +70,11 @@ const MyApplications = () => {
     } catch (error) {
       toast.error(error.response.data.message);
     }
-  }, [isAuthorized]);
+  }, [isAuthorized, setStatus]);
 
   if (!isAuthorized) {
     navigateTo("/");
   }
-
   const deleteApplication = (id) => {
     try {
       axios
@@ -168,7 +191,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   );
 };
 
-const EmployerCard = ({ element, openModal }) => {
+const EmployerCard = ({ element, openModal , status , setStatus}) => {
   return (
     <>
       <div className="job_seeker_card">
@@ -187,15 +210,39 @@ const EmployerCard = ({ element, openModal }) => {
           </p>
         </div>
         <div className="resume">
-         <a href={element.resume.url} target="_blank">Resume</a>
+          <a href={element.resume.url} target="_blank">
+            Resume
+          </a>
         </div>
-
-        <div className="status-btn" style={element.status==="Pending"?{color : "#fc6a03"} : element.status === "Selected"? {color:"#355e3v"} : {color : "#808080"}}>
-            <button >
-                {element.status}
-            </button>
+        <div>
+          <select
+            className={element.status}
+            value={element.status}
+            onChange={(e) => {
+              const newStatus = e.target.value;
+              // // TODO: Update the status in the backend using an API call
+              axios
+                .put(
+                  `http://localhost:4000/application/update/${element._id}`,
+                  { status: newStatus },
+                  { withCredentials: true }
+                )
+                .then((res) => {
+                  // Handle success response
+                  setStatus(newStatus);
+                  console.log(res.data);
+                })
+                .catch((error) => {
+                  // Handle error response
+                  console.log(error.response.data.message);
+                });
+            }}
+          >
+            <option value="Pending">Pending</option>
+            <option value="Selected">Selected</option>
+            <option value="Not Selected">Not Selected</option>
+          </select>
         </div>
-        
       </div>
     </>
   );

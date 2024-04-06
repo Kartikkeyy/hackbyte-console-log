@@ -1411,3 +1411,27 @@ nav .hamburger {
     z-index: 11;
   }
 }
+
+.Pending {
+  background-color: #e75015;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+.Selected {
+  background-color: #0dc800;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 10px;
+}
