@@ -14,6 +14,17 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
         return next(new ErrorHandler("Please upload your resume"),400)
     }
 
+    const {name,email,phone,address} = req.body;
+    const {jobId} = req.params;
+    if(!jobId){
+        return next(new ErrorHandler("Job not Found",404))
+    }
+
+    let appl = await Application.findOne({"applicantID.user":req.user._id,"jobId":jobId})
+    if(appl){
+        return next(new ErrorHandler("You have already registered for this job",400))
+    }
+
     const {resume} = req.files;
     const uploadOnCloudinary = async (file) => {
         try {
@@ -35,11 +46,7 @@ export const postApplication = catchAsyncErrors(async(req,res,next)=>{
         console.log("Cloudinary Error: ",cloudinaryResponse.error || "Unknow Error Occured at cloudinary upload")
         return next(new ErrorHandler("Server side upload failed for your Resume",500))
     }
-    const {name,email,phone,address} = req.body;
-    const {jobId} = req.params;
-    if(!jobId){
-        return next(new ErrorHandler("Job not Found",404))
-    }
+    
     const applicantID = {
         user : req.user._id,
         role : "Student"
