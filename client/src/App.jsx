@@ -18,7 +18,7 @@ import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 
 const App = () => {
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized,user, setUser } = useContext(Context);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -48,9 +48,10 @@ const App = () => {
           <Route path="/job/instjob" element={<Jobs />} />
           <Route path="/job/instjob/:id" element={<JobDetails />} />
           <Route path="/application/post/:id" element={<Application />} />
-          <Route path="/application/my" element={<MyApplications />} />
+          <Route path="/application/my" element={user.role === "Student" ? <MyApplications /> : null} />
+        <Route path="/application/company/jobapp" element={user.role !== "Student" ? <MyApplications /> : null} />
           <Route path="/job/post" element={<PostJob />} />
-          <Route path="/job/me" element={<MyJobs />} />
+          <Route path="/job/companyseeall" element={<MyJobs />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

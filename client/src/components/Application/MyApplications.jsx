@@ -16,6 +16,7 @@ const MyApplications = () => {
 
   useEffect(() => {
     try {
+      // console.log(user);
       if (user && user.role === "Company") {
         console.log("hello");
         axios
@@ -23,7 +24,7 @@ const MyApplications = () => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log(res.data.applications);
+            // console.log(res.data.applications);
             setApplications(res.data.applications);
           });
       }
@@ -186,12 +187,15 @@ const EmployerCard = ({ element, openModal }) => {
           </p>
         </div>
         <div className="resume">
-          <img
-            src={element.resume.url}
-            alt="resume"
-            onClick={() => openModal(element.resume.url)}
-          />
+         <a href={element.resume.url} target="_blank">Resume</a>
         </div>
+
+        <div className="status-btn" style={element.status==="Pending"?{color : "#fc6a03"} : element.status === "Selected"? {color:"#355e3v"} : {color : "#808080"}}>
+            <button >
+                {element.status}
+            </button>
+        </div>
+        
       </div>
     </>
   );

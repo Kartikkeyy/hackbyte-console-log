@@ -74,7 +74,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to={"/job/me"} onClick={() => setShow(false)}>
+                <Link to={"/job/companyseeall"} onClick={() => setShow(false)}>
                   VIEW YOUR JOBS
                 </Link>
               </li>

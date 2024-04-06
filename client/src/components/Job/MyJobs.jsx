@@ -16,6 +16,7 @@ const MyJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
+        console.log("hello");
         const { data } = await axios.get(
           "http://localhost:4000/job/companyseeall",
           { withCredentials: true }
@@ -28,7 +29,7 @@ const MyJobs = () => {
     };
     fetchJobs();
   }, []);
-  if (!isAuthorized || (user && user.role !== "Employer")) {
+  if (!isAuthorized || (user && user.role !== "Company")) {
     navigateTo("/");
   }
 
