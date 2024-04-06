@@ -22,41 +22,40 @@ const Application = () => {
 
   const { id } = useParams();
   const handleApplication = async (e) => {
-    // e.preventDefault();
-    // const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("email", email);
-    // formData.append("phone", phone);
-    // formData.append("address", address);
-    // formData.append("coverLetter", coverLetter);
-    // formData.append("resume", resume);
-    // formData.append("jobId", id);
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("address", address);
+    formData.append("resume", resume);
+    formData.append("jobId", id);
 
-    // try {
-    //   const { data } = await axios.post(
-    //     "http://localhost:3000/application/post",
-    //     formData,
-    //     {
-    //       withCredentials: true,
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-    //   setName("");
-    //   setEmail("");
-    //   setCoverLetter("");
-    //   setPhone("");
-    //   setAddress("");
-    //   setResume("");
-    //   toast.success(data.message);
-    //   navigateTo("/job/getall");
-    // } catch (error) {
-    //   toast.error(error.response.data.message);
-    // }
+    try {
+      const { data } = await axios.post(
+        `http://localhost:4000/application/post/${id}`,
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(data);
+      setName("");
+      setEmail("");
+      setPhone("");
+      setAddress("");
+      setResume("");
+      toast.success(data.message);
+      navigateTo("/job/instjob");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
-  if (!isAuthorized || (user && user.role === "Employer")) {
+  if (!isAuthorized || (user && user.role === "Company")) {
     navigateTo("/");
   }
 
@@ -88,11 +87,6 @@ const Application = () => {
             placeholder="Your Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-          />
-          <textarea
-            placeholder="CoverLetter..."
-            value={coverLetter}
-            onChange={(e) => setCoverLetter(e.target.value)}
           />
           <div>
             <label

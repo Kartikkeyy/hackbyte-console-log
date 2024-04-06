@@ -11,22 +11,27 @@ const JobDetails = () => {
 
   const { isAuthorized, user } = useContext(Context);
 
-    useEffect(() => {
-      axios
-        .get(`http://localhost:4000/job/instjob/${id}`, {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:4000/job/instjob/${id}`, {
           withCredentials: true,
-        })
-        .then((res) => {
-          setJob(res.data.job);
-        })
-        .catch((error) => {
-          navigateTo("/notfound");
         });
-    }, []);
+        console.log(res.data.job[0]);
+        setJob(res.data.job[0]);
+      } catch (error) {
+        navigateTo("/notfound");
+      }
+    };
 
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     if (!isAuthorized) {
       navigateTo("/login");
     }
+  }, [isAuthorized, navigateTo]);
 
   return (
     <section className="jobDetail page">
@@ -68,7 +73,7 @@ const JobDetails = () => {
             {user && user.role === "Employer" ? (
               <></>
             ) : (
-              <Link to={`/application/${job._id}`}>Apply Now</Link>
+              <Link to={`/application/post/${job._id}`}>Apply Now</Link>
             )}
           </div>
         </div>
