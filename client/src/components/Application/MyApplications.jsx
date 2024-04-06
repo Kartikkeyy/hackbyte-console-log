@@ -14,49 +14,56 @@ const MyApplications = () => {
   const { isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
-//   useEffect(() => {
-//     try {
-//       if (user && user.role === "Employer") {
-//         axios
-//           .get("http://localhost:3000/application/employer/getall", {
-//             withCredentials: true,
-//           })
-//           .then((res) => {
-//             setApplications(res.data.applications);
-//           });
-//       } else {
-//         axios
-//           .get("http://localhost:3000/application/jobseeker/getall", {
-//             withCredentials: true,
-//           })
-//           .then((res) => {
-//             setApplications(res.data.applications);
-//           });
-//       }
-//     } catch (error) {
-//       toast.error(error.response.data.message);
-//     }
-//   }, [isAuthorized]);
+  useEffect(() => {
+    try {
+    //   if (user && user.role === "Company") {
+    //     axios
+    //       .get("http://localhost:4000/application/my", {
+    //         withCredentials: true,
+    //       })
+    //       .then((res) => {
+    //         setApplications(res.data.applications);
+    //       });
+    //   }
+    console.log(user.role);
+      if(user && user.role === "Student") {
+        console.log("hello");
+        axios
+          .get("http://localhost:4000/application/my", {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data.applications);
+            setApplications(res.data.applications);
+          })
+          .catch((error)=>{
+            console.log(error);
+          }) ;
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }, [isAuthorized]);
 
   if (!isAuthorized) {
     navigateTo("/");
   }
 
   const deleteApplication = (id) => {
-    // try {
-    //   axios
-    //     .delete(`http://localhost:3000/application/delete/${id}`, {
-    //       withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //       toast.success(res.data.message);
-    //       setApplications((prevApplication) =>
-    //         prevApplication.filter((application) => application._id !== id)
-    //       );
-    //     });
-    // } catch (error) {
-    //   toast.error(error.response.data.message);
-    // }
+    try {
+      axios
+        .delete(`http://localhost:3000/application/delete/${id}`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          toast.success(res.data.message);
+          setApplications((prevApplication) =>
+            prevApplication.filter((application) => application._id !== id)
+          );
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   const openModal = (imageUrl) => {
@@ -70,7 +77,7 @@ const MyApplications = () => {
 
   return (
     <section className="my_applications page">
-      {user && user.role === "Job Seeker" ? (
+      {user && user.role === "Student" ? (
         <div className="container">
           <h1>My Applications</h1>
           {applications.length <= 0 ? (
@@ -150,6 +157,11 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
             Delete Application
           </button>
         </div>
+        <div className="status-btn" style={element.status==="Pending"?{color : "#fc6a03"} : element.status === "Selected"? {color:"#355e3v"} : {color : "#808080"}}>
+            <button >
+                {element.status}
+            </button>
+        </div>
       </div>
     </>
   );
@@ -171,9 +183,6 @@ const EmployerCard = ({ element, openModal }) => {
           </p>
           <p>
             <span>Address:</span> {element.address}
-          </p>
-          <p>
-            <span>CoverLetter:</span> {element.coverLetter}
           </p>
         </div>
         <div className="resume">

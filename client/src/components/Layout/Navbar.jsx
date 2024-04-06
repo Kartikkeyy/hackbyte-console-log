@@ -37,13 +37,15 @@ const Navbar = () => {
               HOME
             </Link>
           </li>
+          {user && user.role !== "Company" && (
+            <li>
+              <Link to={"/job/instjob"} onClick={() => setShow(false)}>
+                ALL JOBS
+              </Link>
+            </li>
+          )}
           <li>
-            <Link to={"/job/instjob"} onClick={() => setShow(false)}>
-              ALL JOBS
-            </Link>
-          </li>
-          <li>
-            <Link to={"/applications/me"} onClick={() => setShow(false)}>
+            <Link to={"/application/my"} onClick={() => setShow(false)}>
               {user && user.role === "Company"
                 ? "APPLICANT'S APPLICATIONS"
                 : "MY APPLICATIONS"}
