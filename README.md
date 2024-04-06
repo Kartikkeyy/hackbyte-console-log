@@ -66,4 +66,18 @@ RecruitIn represents a paradigm shift in the way job placements are managed with
 
 To run this project locally, follow these steps:
 
-1. Clone the repository to your local machine:
+1. Clone the repository to your local machine.<br>
+2. Create a config folder inside server and create a config.env file inside it.<br>
+3. Setup the following things inside your config.env:<br><br>
+   `PORT`<br><br>
+   `CLOUDINARY_CLIENT_NAME`<br><br>
+   `CLOUDINARY_CLIENT_API`<br><br>
+   `CLOUDINARY_CLIENT_SECRET`<br><br>
+   `MONGO_URI`<br><br>
+   `JWT_SECRET_KEY`<br><br>
+   `FRONTEND_URL`<br><br>
+   `COOKIE_EXPIRE`<br><br>
+   `JWT_EXPIRE`<br><br>
+4. Run the command `npm i` in server and client directory.<br>
+5. Run the command `npm run dev` in server and client.<br>
+6. Here you go !
