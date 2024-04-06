@@ -209,11 +209,12 @@ p {
 }
 
 .footerShow {
-  background: #18191c;
+  background: #3d3d3d;
   display: flex;
   justify-content: space-between;
   padding: 25px 120px;
   align-items: center;
+  height: 150px;
 }
 .footerShow div {
   display: flex;
@@ -221,6 +222,7 @@ p {
   font-size: 16px;
   color: #f1f3f6;
 }
+
 .footerShow div a {
   font-size: 20px;
   text-decoration: none;
@@ -1182,8 +1184,8 @@ p {
   }
 }
 nav {
-  background: #18191c;
-  padding: 0 20px;
+  background: #3e98fe;
+  padding: 10px;
 }
 nav .container {
   max-width: 1500px;
@@ -1202,41 +1204,47 @@ nav .container .logo img {
 }
 nav .menu {
   display: flex;
-  gap: 25px;
+  gap: 50px;
   align-items: center;
+  margin: auto;
+  justify-content: space-between;
 }
 nav .menu button {
-  height: fit-content;
+  height: 50px;
+  width: 100px;
   padding: 7px;
   border: 1px solid #f1f3f6;
   color: #f1f3f6;
   background: transparent;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: 300;
+  margin: 0 40px 0 700px;
 }
 nav .menu button:hover {
-  color: #f1f3f6;
-  background: #184235;
+  color: #3e98fe;
+  background: #fff;
   transition: all 0.3s;
   cursor: pointer;
   font-weight: 500;
-  border: 1px solid #184235;
+  border: 1px solid #3e98fe;
 }
+
 nav .menu li a {
   color: #f1f3f6;
   text-decoration: none;
   font-weight: 300;
   font-size: 20px;
   position: relative;
+  
 }
 nav .menu li a:hover {
-  color: #3e98fe;
+  color: #fff;
   transition: all 0.3s;
 }
 nav .menu li a::before {
   content: "";
   position: absolute;
-  background: #184235;
+  background: #fff;
   height: 1px;
   width: 100%;
   left: -100%;
@@ -1247,6 +1255,8 @@ nav .menu li a:hover::before {
   transition: all 0.3s;
   left: 0;
 }
+
+
 nav .hamburger {
   display: none;
 }
@@ -1306,16 +1316,16 @@ nav .hamburger {
     -moz-box-shadow: 9px 0px 16px 0px rgba(0, 0, 0, 0.75);
   }
   nav .show-menu li a {
-    color: #184235;
+    color: #3e98fe;
     font-weight: 600;
   }
   nav .show-menu button {
-    color: #184235;
-    border: 1px solid #184235;
+    color: #3e98fe;
+    border: 1px solid #3e98fe;
     font-weight: 600;
   }
   nav .show-menu button:hover {
-    background: #18191c;
+    background: #1e497b;
     color: #f1f3f6;
   }
 }
