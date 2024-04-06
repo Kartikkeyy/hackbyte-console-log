@@ -234,12 +234,12 @@ p {
 .footerShow div {
   display: flex;
   gap: 12px;
-  font-size: 16px;
+  font-size: 20px;
   color: #f1f3f6;
 }
 
 .footerShow div a {
-  font-size: 20px;
+  font-size: 25px;
   text-decoration: none;
   color: #f1f3f6;
 }
@@ -1211,8 +1211,8 @@ nav .container {
   justify-content: space-between;
 }
 nav .container .logo {
-  width: 120px;
-  height: 120px;
+  width: auto;
+  height: auto;
 }
 nav .container .logo img {
   width: 100%;
@@ -1416,11 +1416,11 @@ nav .hamburger {
   background-color: #e75015;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 15px 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 15px;
+  font-size: 17px;
   border-radius: 10px;
 }
 
