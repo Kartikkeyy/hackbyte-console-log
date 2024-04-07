@@ -62,6 +62,7 @@ const MyApplications = () => {
           .then((res) => {
             // console.log(res.data.applications);
             setApplications(res.data.applications);
+
           })
           .catch((error)=>{
             console.log(error);
@@ -90,7 +91,7 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     try {
       axios
-        .delete(`http://localhost:3000/application/delete/${id}`, {
+        .delete(`http://localhost:4000/application/delete/${id}`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -213,6 +214,9 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
           </p>
           <p>
             <span>Address:</span> {element.address}
+          </p>
+          <p>
+            <span>Company:</span> {element.name}
           </p>
         </div>
         <div className="resume">

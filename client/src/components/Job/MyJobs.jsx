@@ -63,7 +63,7 @@ const MyJobs = () => {
   //Function For Deleting Job
   const handleDeleteJob = async (jobId) => {
     await axios
-      .delete(`http://localhost:3000/job/delete/${jobId}`, {
+      .delete(`http://localhost:4000/job/delete/${jobId}`, {
         withCredentials: true,
       })
       .then((res) => {
