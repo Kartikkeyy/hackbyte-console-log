@@ -1,5 +1,5 @@
 # RecruitIn 
-### A Job Recruitment Platform
+### A Job Recruitment Platform - Demo Video ⬇️
 
 [![DEMO VIDEO](https://i3.ytimg.com/vi/LlyBh7tNswY/maxresdefault.jpg)](https://www.youtube.com/watch?v=LlyBh7tNswY&t=177s)
 
